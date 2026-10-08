@@ -15,7 +15,6 @@ public class Student {
     private Boolean isGraduated;
     private Double tuition;
 
-    // 必须提供无参构造函数（反射实例化所需）
     public Student() {
     }
 
