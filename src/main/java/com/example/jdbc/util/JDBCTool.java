@@ -166,7 +166,8 @@ public class JDBCTool {
         try {
             Class<?> clazz = obj.getClass();
             String tableName = clazz.getSimpleName().toLowerCase();
-            Field idField = clazz.getDeclaredField("id");
+            Field idField = findField(clazz, "id");
+            if (idField == null) return 0;
             idField.setAccessible(true);
             Object idVal = idField.get(obj);
 
@@ -219,5 +220,42 @@ public class JDBCTool {
             }
         }
         return sb.toString();
+    }
+
+    // 辅助方法：免显式传 Connection 的重载统一访问方法
+    public static <T> int save(T obj) {
+        try (Connection conn = getConnection()) {
+            return save(obj, conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public static <T> int update(T obj) {
+        try (Connection conn = getConnection()) {
+            return update(obj, conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public static <T> int delete(T obj) {
+        try (Connection conn = getConnection()) {
+            return delete(obj, conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public static <T> T getOneById(String id, Class<T> clazz) {
+        try (Connection conn = getConnection()) {
+            return getOneById(id, clazz, conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
