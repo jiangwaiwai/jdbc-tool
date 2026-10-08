@@ -9,7 +9,6 @@ public class College {
     private String name;
     private String code;
 
-    // 必须提供无参构造函数（反射实例化所需）
     public College() {
     }
 
