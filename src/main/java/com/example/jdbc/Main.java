@@ -75,7 +75,7 @@ public class Main {
 
             // 增
             Student s1 = new Student("S001", "张三", "计算机科学与技术", 20, sdf.parse("2024-09-01"), false, 6500.0);
-            Student s2 = new Student("S002", "李四", "交通工程", 21, sdf.parse("2023-09-01"), true, 6000.0);
+            Student s2 = new Student("S002", "李四", "交通运输", 21, sdf.parse("2023-09-01"), true, 6000.0);
             JDBCTool.save(s1, conn);
             JDBCTool.save(s2, conn);
             System.out.println("保存学生成功: ");
@@ -97,7 +97,7 @@ public class Main {
             }
 
             // 改
-            findS1.setMajor("软件工程");
+            findS1.setMajor("通信工程");
             findS1.setTuition(7000.0);
             findS1.setIsGraduated(true);
             JDBCTool.update(findS1, conn);
